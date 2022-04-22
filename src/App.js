@@ -1,4 +1,6 @@
 import './App.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
 
 const bankOne = [
   {
@@ -114,30 +116,52 @@ const bankTwo = [
   }
 ];
 
-const Keyboard = ({ play }) => {
-  return bankOne.map(({ keyTrigger, url }) => {
-    return <button className='drum-pad' id={keyTrigger} key={keyTrigger} onClick={() => play(keyTrigger)} >
-      <audio className="clip" id={keyTrigger} src={url}  />
-      {keyTrigger}
-    </button>
-  })
-}
 
 function App() {
-  const play = (keyTrigger) => {
-    const audio = document.getElementById(keyTrigger);
-    audio.currentTime = 0;
-    console.log(audio);
-    audio.play();
-  }
-
   return (
-    <div id="drum-machine">
-      <div id="display">
-        <Keyboard play={play} />
+    <div id="drum-machine" className='bg-info min-vh-100 text-white'>
+      <div id="display" className='text-center'>
+        <h2>Drum Machine</h2>
+        {bankOne.map((clip) => (
+          <Pad key={clip.id} clip={clip} />
+        ))}
       </div>
     </div>
   );
+}
+
+function Pad({ clip }) {
+
+  const [active, setActive] = React.useState(false);
+
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+  }, []);
+
+  const handleKeyPress = (e) => {
+    if (e.keyCode === clip.keyCode) {
+      playSound();
+    }
+  }
+
+  const playSound = () => {
+    const audioTag = document.getElementById(clip.keyTrigger);
+    setActive(true);
+    setTimeout(() => setActive(false), 200)
+    audioTag.currentTime = 0;
+    audioTag.play();
+  }
+
+  return (
+    <div onClick={playSound} className={`btn btn-secondary p-4 m-3 ${active && 'btn-warning'}`}>
+      <audio className='clip' id={clip.keyTrigger} src={clip.url} />
+      {clip.keyTrigger}
+    </div>
+  )
 }
 
 export default App;
