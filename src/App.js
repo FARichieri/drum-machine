@@ -116,81 +116,82 @@ const bankTwo = [
   }
 ];
 
-function App() {
-  const [volume, setVolume] = React.useState(1);
-  const [recording, setRecording] = React.useState("");
-  const [speed, setSpeed] = React.useState(0.5);
+const soundsName = {
+  heaterKit: "Heater Kit",
+  smoothPianoKit: "Smooth Piano Kit"
+}
 
-  const playRecording = () => {
-    let index = 0;
-    let recorderArray = recording.split(" ");
-    const interval = setInterval(() => {
-      const audioTag = document.getElementById(recorderArray[index]);
-      audioTag.volume = volume;
-      audioTag.currentTime = 0;
-      audioTag.play();
-      index++
-    }, speed * 600);
-    setTimeout(() => clearInterval(interval), 600 * speed * recorderArray.length - 1)
-  };
+const soundsGroup = {
+  heaterKit: bankOne,
+  smoothPianoKit: bankTwo
+}
+
+const KeyboardKey = ({ play, sound: { id, keyTrigger, url, keyCode }}) => {
+  const handleKeydown = (e) => {
+    if (e.keyCode === keyCode) {
+      play(keyTrigger, id)
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleKeydown)
+  }, [])
+
+  return (
+    <button className='drum-pad' onClick={() => play(keyTrigger, id)} id={keyCode}>
+      <audio className="clip" id={keyTrigger} src={url}  />
+      {keyTrigger}
+    </button>
+  )
+}
+
+const Keyboard = ({ play, sounds }) => (
+  <div>
+    {sounds.map((sound) => <KeyboardKey play={play} sound={sound} />)}
+  </div>
+)
+
+const DumControle = ({ changeSoundsGroup, name }) => {
+  return (
+    <div className='controle'>
+      <h2 id="display">{name}</h2>
+      <button onClick={changeSoundsGroup}>Change Sounds Group</button>
+    </div>
+  )
+}
+
+function App() {
+  const [soundName, setSoundName] = React.useState("");
+  const [soundType, setSoundType] = React.useState("heaterKit");
+  const [sounds, setSounds] = React.useState(soundsGroup[soundType]);
+
+  const play = (keyTrigger, sound) => {
+    setSoundName(sound)
+    const audio = document.getElementById(keyTrigger);
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const changeSoundsGroup = () => {
+    setSoundName("")
+    if (soundType === "heaterKit") {
+      setSoundType("smoothPianoKit")
+      setSounds(soundsGroup.smoothPianoKit)
+    } else {
+      setSoundType("heaterKit")
+      setSounds(soundsGroup.heaterKit)  
+    }
+  }
 
   return (
     <div id="drum-machine" className='bg-info min-vh-100 text-white'>
       <div id="display" className='text-center'>
         <h2>Drum Machine</h2>
-        {bankOne.map((clip) => (
-          <Pad key={clip.id} clip={clip} volume={volume} setRecording={setRecording} />
-        ))}
-        <br />
-        <h4>Volume</h4>
-        <input type="range" step="0.01" value={volume} max="1" min="0" className='w-50' onChange={(e) => setVolume(e.target.value)} />
-        <h3>{recording}</h3>
-        {recording && (
-          <>
-            <button onClick={playRecording} className='btn btn-success'>play</button>
-            <button onClick={() => setRecording("")} className='btn btn-danger'>clear</button>
-            <br />
-            <h4>Speed</h4>
-            <input type="range" step="0.01" value={speed} max="1.2" min="0.1" className='w-50' onChange={(e) => setSpeed(e.target.value)} />
-          </>
-        )}
+        <Keyboard play={play} sounds={sounds} />
+        <DumControle name={soundName || soundName[soundType]} changeSoundsGroup={changeSoundsGroup} />
       </div>
     </div>
   );
-}
-
-function Pad({ clip, volume, setRecording }) {
-  const [active, setActive] = React.useState(false);
-
-  React.useEffect(() => {
-      document.addEventListener('keydown', handleKeyPress);
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    }
-  }, []);
-
-  const handleKeyPress = (e) => {
-    if (e.keyCode === clip.keyCode) {
-      playSound();
-    }
-  }
-
-  const playSound = () => {
-    const audioTag = document.getElementById(clip.keyTrigger);
-    setActive(true);
-    setTimeout(() => setActive(false), 200)
-    audioTag.volume = volume;
-    audioTag.currentTime = 0;
-    audioTag.play();
-    setRecording(prev => prev + clip.keyTrigger + " ")
-  }
-
-  return (
-    <div onClick={playSound} className={`btn btn-secondary p-4 m-3 ${active && 'btn-warning'}`}>
-      <audio className='clip' id={clip.keyTrigger} src={clip.url} />
-        {clip.keyTrigger}      
-    </div>
-  )
 }
 
 export default App;
