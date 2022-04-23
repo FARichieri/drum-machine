@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+* {
+
+	user-select: none;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;  
+	outline: none;
+
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -17,6 +29,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: 'Orbitron', sans-serif;
+	font-weight: 400;
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -27,7 +41,7 @@ body {
 }
 ol, ul {
 	list-style: none;
-}
+} 
 blockquote, q {
 	quotes: none;
 }
@@ -40,3 +54,121 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+#drum-machine {
+	box-shadow: 0 0 10px 1px white;
+	border: 1px solid black;
+	border-radius: 20px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: auto;
+	height: auto;
+	color: white;
+	background-color: rgb(0, 0, 0);
+}
+
+.keyboard{
+	display: grid;
+	gap: 1px;
+	grid-template-columns: repeat(3, 1fr);
+	align-items: center;
+	width: 280px;
+	height: 200px;
+	margin: auto;
+}
+
+#display {
+	width: 320px;
+	margin: 0 auto;
+	align-items: center;
+	text-align: center;
+}
+
+.drum-container {
+	margin: 20px auto;
+	width: auto;
+}
+
+.drum-pad {
+    position: relative;
+    width: 80px;
+    height: 60px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+	margin: auto;
+	color:#ffffff;
+	background-color: #00800098;
+	border: 1px solid #000000;
+	/* box-shadow: 0 0 5px .5px white; */
+	transform: .3s;
+	font-weight: bolder;
+}
+
+.volume {
+	display: flex;
+	margin: 5px 30px;
+}
+
+.volume input {
+	margin-bottom: 5px;
+	width: 200px;
+}
+
+.volume h2 {
+	font-size: 1rem;
+	width: 200px;
+}
+
+html {
+	background-color: black;
+}
+
+.name {
+	margin: 0;
+}
+
+#display button {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 5px;
+	font-weight: bolder;
+}
+
+.changeButton {
+	background-color: rgba(255, 255, 255, 0.777);
+}
+
+.offButton {
+	background-color: rgba(255, 0, 0, 0.559);
+	width: 50px;
+	
+}
+
+.onButton {
+	background-color: rgba(5, 242, 5, 0.629);
+	box-shadow: 0 0 10px 1px white;
+	width: 50px;
+	color: white;
+}
+
+.by {
+	position: absolute;
+	bottom: -12%;
+	left: 38.5%;
+	font-size: .8rem;
+	cursor: pointer;
+	text-decoration: none;
+  }
+  
+  .by a {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.607);
+	transition: .3s;
+  }
+  
+  .by a:hover {
+	color: white;
+  }
