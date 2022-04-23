@@ -8,8 +8,6 @@
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;  
 	outline: none;
-	font-family: 'Orbitron', sans-serif;
-
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -31,6 +29,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	font-weight: 400;
+	font-family: 'Orbitron', sans-serif;
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -38,6 +37,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: 'Orbitron', sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -137,6 +137,7 @@ html {
 	border-radius: 5px;
 	margin: 5px;
 	font-weight: bolder;
+	font-family: 'Orbitron', sans-serif;
 }
 
 .changeButton {
