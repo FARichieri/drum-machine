@@ -8,6 +8,7 @@
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;  
 	outline: none;
+	font-family: 'Orbitron', sans-serif;
 
 }
 html, body, div, span, applet, object, iframe,
@@ -29,7 +30,6 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: 'Orbitron', sans-serif;
 	font-weight: 400;
 }
 article, aside, details, figcaption, figure, 
