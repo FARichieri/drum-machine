@@ -119,7 +119,9 @@ table {
 
 .volume h2 {
 	font-size: 1rem;
-	width: 200px;
+	width: 210px;
+	text-align: left;
+	margin-left: 5px;
 }
 
 html {
