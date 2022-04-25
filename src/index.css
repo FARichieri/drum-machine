@@ -84,7 +84,8 @@ table {
 	text-align: center;
 	height: 100px;
 	justify-content: center;
-	margin-top: 10px;
+	margin-top: 15px;
+	border-top: 1px solid rgba(255, 255, 255, 0.069);
 }
 
 .drum-container {
@@ -111,6 +112,7 @@ table {
 .volume {
 	display: flex;
 	margin: 5px 30px;
+	color: rgb(191, 190, 190);
 }
 
 .volume input {
@@ -126,11 +128,13 @@ table {
 }
 
 html {
-	background-color: rgba(5, 5, 5, 0.961);
+	background-color: rgba(5, 5, 5, 0.992);
 }
 
 .name {
 	margin: 0;
+	margin-top: 5px;
+	color: white
 }
 
 #display button {
@@ -141,6 +145,12 @@ html {
 	font-family: 'Orbitron', sans-serif;
 }
 
+.changeButton {
+	background-color: rgba(255, 255, 255, 0.777);
+}
+.changeButton:active {
+	box-shadow: 0 0 8px 1px rgb(110, 109, 109);
+}
 .changeButton {
 	background-color: rgba(255, 255, 255, 0.777);
 }
