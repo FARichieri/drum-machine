@@ -66,6 +66,8 @@ table {
 	height: auto;
 	color: white;
 	background-color: rgb(0, 0, 0);
+	animation-name: appear;
+	animation-duration: 2s;
 }
 
 .keyboard{
@@ -175,6 +177,8 @@ html {
 	font-size: .8rem;
 	cursor: pointer;
 	text-decoration: none;
+	animation-name: appear;
+	animation-duration: 10s;
   }
   
   .by a {
@@ -185,4 +189,9 @@ html {
   
   .by a:hover {
 	color: white;
+  }
+
+  @keyframes appear {
+	from {opacity: 0;}
+	to {opacity: 1;}
   }
